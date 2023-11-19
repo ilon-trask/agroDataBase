@@ -15,9 +15,7 @@ export default async function onSubmit(
         date: new Date(data.date),
         userId,
       },
-      include: {
-        user: true,
-      },
+      include: { user: true },
     });
     return res;
   } else {
