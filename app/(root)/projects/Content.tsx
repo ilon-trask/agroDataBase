@@ -50,7 +50,7 @@ function Content({ projects }: { projects: ProjectWithUser[] }) {
         </Flex>
         <Grid gridTemplateColumns={"repeat(3,1fr)"} gap={"10px"} mt={"10px"}>
           {projects.map((el) => (
-            <Card maxW="sm">
+            <Card maxW="sm" key={el.id}>
               <CardBody>
                 <Stack mt="2" spacing="1">
                   <Heading size="lg" color={colors.primaryColor}>

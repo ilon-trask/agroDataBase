@@ -143,7 +143,7 @@ function Content({ events }: { events: DemonstrationActivity[] | [] }) {
         </Flex>
         <Grid gridTemplateColumns={"repeat(3,1fr)"} gap={"10px"} mt={"10px"}>
           {events.map((el) => (
-            <Card maxW="sm">
+            <Card maxW="sm" key={el.id}>
               <CardBody>
                 <Stack mt="2" spacing="1">
                   <Heading size="lg" color={colors.primaryColor}>
