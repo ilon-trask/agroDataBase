@@ -2,12 +2,6 @@
 import MyHeading from "@/components/ui/MyHeading";
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import React from "react";
-import FarmInnovationSection from "./FarmInnovationsSection/FarmInnovationSection";
-import FarmProcessSection from "./FarmProcessSection/FarmProcessSection";
-import FarmDirectionSection from "./FarmDirectionSection/FarmDirectionSection";
-import FarmOrganizationsSection from "./FarmOrganizationsSection/FarmOrganizationsSection";
-import FarmEcologySection from "./FarmEcologySection/FarmEcologySection";
-import FarmScientificProjectSection from "./FarmScientificProjectSection/FarmScientificProjectSection";
 
 export default function FarmTabs() {
   return (
@@ -21,7 +15,7 @@ export default function FarmTabs() {
         <Tab>Наукові проекти</Tab>
         <Tab>Територіальні проекти</Tab>
       </TabList>
-      <TabPanels>
+      {/* <TabPanels>
         <TabPanel>
           <MyHeading>
             Перелік найважливіших впроваджених інновацій за останні три роки з
@@ -68,7 +62,7 @@ export default function FarmTabs() {
           </MyHeading>
           <FarmProcessSection />
         </TabPanel>
-      </TabPanels>
+      </TabPanels> */}
     </Tabs>
   );
 }
