@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import FarmDataTable from "../FarmDataTable";
 import MyButton from "@/components/ui/MyButton";
 import FarmDataDialog from "./component/FarmDataDialog/FarmDataDialog";
-import { DemonstrationFarm, Region, User as PrismaUser } from "@prisma/client";
+import { POU, Region, User as PrismaUser } from "@prisma/client";
 import { POUWithSpecialization } from "@/types/DemonstrationFarmsTypes";
 import { useFarmsData } from "@/hooks/use_farmsData";
 import { User } from "@supabase/auth-helpers-nextjs";

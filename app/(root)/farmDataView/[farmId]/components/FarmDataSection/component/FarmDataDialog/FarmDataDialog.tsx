@@ -12,12 +12,7 @@ import {
   ModalHeader,
   Select,
 } from "@chakra-ui/react";
-import {
-  DemonstrationFarm,
-  Enterprise,
-  Region,
-  User as PrismaUser,
-} from "@prisma/client";
+import { POU, Enterprise, Region, User as PrismaUser } from "@prisma/client";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import {
   useForm,
@@ -63,7 +58,7 @@ export function FarmDataDialogContent({
   prismaUser: PrismaUser | null | undefined;
   errors: FieldErrors<FarmDataType>;
   control: Control<FarmDataType, any>;
-  farm: DemonstrationFarm;
+  farm: POU;
   user: User | null;
   regions: Region[] | [];
 }) {
@@ -250,7 +245,7 @@ export default function FarmDataDialog({
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   regions: Region[] | [];
-  farm: DemonstrationFarm;
+  farm: POU;
   enterprise?: Enterprise | null;
 }) {
   const {
