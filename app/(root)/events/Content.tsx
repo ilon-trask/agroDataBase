@@ -93,14 +93,18 @@ function Content({ events }: { events: DemonstrationActivity[] | [] }) {
             <Div fontWeight={"bold"}>С</Div>
             <Div fontWeight={"bold"}>Н</Div>
             {Array.from({ length: startDay }, (_, i) => i + 1).map((el) => (
-              <Div height={"100%"}></Div>
+              <Div height={"100%"} key={el}></Div>
             ))}
             {(() => {
               const arr = Array.from(
                 { length: months[month]?.amount },
                 (_, i) => i + 1
               );
-              return arr.map((el) => <Div height={"100%"}>{el}</Div>);
+              return arr.map((el) => (
+                <Div height={"100%"} key={el}>
+                  {el}
+                </Div>
+              ));
             })()}
           </Grid>
         </Div>
@@ -112,7 +116,9 @@ function Content({ events }: { events: DemonstrationActivity[] | [] }) {
               Області
             </option>
             {districts.map((el) => (
-              <option value={el}>{el}</option>
+              <option value={el} key={el}>
+                {el}
+              </option>
             ))}
           </Select>
           <Select>

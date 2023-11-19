@@ -34,7 +34,9 @@ function Content({ projects }: { projects: ProjectWithUser[] }) {
               Області
             </option>
             {districts.map((el) => (
-              <option value={el}>{el}</option>
+              <option value={el} key={el}>
+                {el}
+              </option>
             ))}
           </Select>
           <Select>
