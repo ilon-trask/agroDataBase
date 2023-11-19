@@ -106,7 +106,9 @@ export default function DemonstrationActivitiesDialog({
                 Область
               </option>
               {getDistricts().map((el) => (
-                <option value={el}>{el}</option>
+                <option value={el} key={el}>
+                  {el}
+                </option>
               ))}
             </Select>
           </FormLabel>
@@ -117,7 +119,9 @@ export default function DemonstrationActivitiesDialog({
                 Спеціалізація
               </option>
               {getEventsDirections().map((el) => (
-                <option value={el}>{el}</option>
+                <option value={el} key={el}>
+                  {el}
+                </option>
               ))}
             </Select>
           </FormLabel>
@@ -128,7 +132,9 @@ export default function DemonstrationActivitiesDialog({
                 Вид
               </option>
               {getEventTypes().map((el) => (
-                <option value={el}>{el}</option>
+                <option value={el} key={el}>
+                  {el}
+                </option>
               ))}
             </Select>
           </FormLabel>
