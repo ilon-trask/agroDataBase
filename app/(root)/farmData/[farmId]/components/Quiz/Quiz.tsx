@@ -26,7 +26,7 @@ import {
   FarmDataDialogContent,
   FarmDataType,
 } from "../../../../farmDataView/[farmId]/components/FarmDataSection/component/FarmDataDialog/FarmDataDialog";
-import { DemonstrationFarm, Region, User as PrismaUser } from "@prisma/client";
+import { POU, Region, User as PrismaUser } from "@prisma/client";
 import { User } from "@supabase/auth-helpers-nextjs";
 import MyHeading from "@/components/ui/MyHeading";
 
@@ -103,7 +103,7 @@ export default function Quiz({
   prismaUser,
   user,
 }: {
-  farm: DemonstrationFarm;
+  farm: POU;
   regions: Region[] | [];
   prismaUser: PrismaUser | null;
   user: User | null;
