@@ -1,0 +1,27 @@
+.front {
+  transition: 0.6s linear;
+  backface-visibility: hidden;
+  transform: perspective(500px) rotateY(0deg);
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+}
+.card:hover .front {
+  transform: perspective(500px) rotateY(-180deg);
+}
+.card:hover .back {
+  transform: perspective(500px) rotateY(0deg);
+}
+.back {
+  text-align: left;
+  width: 150px;
+  height: 210px;
+  transition: 0.6s linear;
+  backface-visibility: hidden;
+  transform: perspective(500px) rotateY(180deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+}

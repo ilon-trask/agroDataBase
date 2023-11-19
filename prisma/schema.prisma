@@ -1,0 +1,167 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    Int                     @id @default(autoincrement())
+  sub                   String
+  role                  String                  @default("user")
+  position              String?
+  workPhone             String?
+  phone                 String?
+  firstName             String
+  secondName            String
+  DemonstrationActivity DemonstrationActivity[]
+  Trainer               Trainer[]
+  Direction             Direction[]
+  DemonstrationFarm     POU[]
+  Specialization        Specialization[]
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  Enterprise            Enterprise[]            @relation("User")
+  OwnEnterprise         Enterprise[]            @relation("Creator")
+  Project               Project[]
+  Offer                 Offer[]
+
+  @@index([sub])
+}
+
+model DemonstrationActivity {
+  id             Int      @id @default(autoincrement())
+  name           String
+  date           DateTime
+  district       String
+  type           String
+  direction      String
+  specialization String
+  isPublic       Boolean  @default(false)
+  user           User     @relation(fields: [userId], references: [id])
+  userId         Int
+  createdAt      DateTime @default(now())
+
+  @@index([userId])
+}
+
+model POU {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  createdAt          DateTime             @default(now())
+  FarmSpecialization FarmSpecialization[]
+  user               User                 @relation(fields: [userId], references: [id])
+  userId             Int
+  Enterprise         Enterprise?
+  WebResource        WebResource[]
+  Offer              Offer[]
+
+  @@map("DemonstrationFarm")
+}
+
+model Specialization {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  FarmSpecialization FarmSpecialization[]
+  user               User?                @relation(fields: [userId], references: [id])
+  userId             Int?
+}
+
+model FarmSpecialization {
+  id                   Int                    @id @default(autoincrement())
+  areaOrPopulation     Float
+  Specialization       Specialization         @relation(fields: [specializationId], references: [id])
+  specializationId     Int
+  POU                  POU                    @relation(fields: [POUId], references: [id])
+  POUId                Int
+  AmountSpecialization AmountSpecialization[]
+}
+
+model AmountSpecialization {
+  id                   Int                @id @default(autoincrement())
+  year                 Int
+  amount               Float
+  FarmSpecialization   FarmSpecialization @relation(fields: [farmSpecializationId], references: [id])
+  farmSpecializationId Int
+}
+
+model Trainer {
+  id        Int         @id @default(autoincrement())
+  name      String
+  direction String
+  contact   String
+  createdAt DateTime    @default(now())
+  user      User        @relation(fields: [userId], references: [id])
+  userId    Int
+  Direction Direction[]
+}
+
+model Direction {
+  id      Int       @id @default(autoincrement())
+  name    String
+  Trainer Trainer[]
+  user    User?     @relation(fields: [userId], references: [id])
+  userId  Int?
+}
+
+model Enterprise {
+  id                  Int    @id @default(autoincrement())
+  // name                String
+  code                Int    @unique
+  district            String
+  village             String
+  // pagesOnInternet     String
+  // pagesOnNetworks     String
+  DemonstrationFarm   POU    @relation(fields: [demonstrationFarmId], references: [id])
+  Creator             User   @relation("Creator", fields: [creatorId], references: [id])
+  creatorId           Int
+  User                User?  @relation("User", fields: [userId], references: [id])
+  userId              Int?
+  Region              Region @relation(fields: [regionId], references: [id])
+  regionId            Int
+  demonstrationFarmId Int    @unique
+
+  @@index([userId, regionId, demonstrationFarmId, code])
+}
+
+model Region {
+  id         Int          @id @default(autoincrement())
+  name       String
+  Enterprise Enterprise[]
+}
+
+model WebResource {
+  id                  Int    @id @default(autoincrement())
+  name                String
+  link                String
+  type                String
+  DemonstrationFarm   POU    @relation(fields: [demonstrationFarmId], references: [id])
+  demonstrationFarmId Int
+}
+
+model Project {
+  id       Int     @id @default(autoincrement())
+  name     String
+  goal     String
+  user     User    @relation(fields: [userId], references: [id])
+  userId   Int
+  isPublic Boolean @default(false)
+}
+
+model Offer {
+  id          Int      @id @default(autoincrement())
+  description String
+  POU         POU?     @relation(fields: [pOUId], references: [id])
+  pOUId       Int?
+  category    String
+  type        String
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  isPublic    Boolean  @default(false)
+}
