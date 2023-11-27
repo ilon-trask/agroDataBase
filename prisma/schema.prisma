@@ -11,30 +11,123 @@ datasource db {
 }
 
 model User {
-  id                    Int                     @id @default(autoincrement())
-  sub                   String
-  role                  String                  @default("user")
-  position              String?
-  workPhone             String?
-  phone                 String?
-  firstName             String
-  secondName            String
-  DemonstrationActivity DemonstrationActivity[]
-  Trainer               Trainer[]
-  Direction             Direction[]
-  DemonstrationFarm     POU[]
-  Specialization        Specialization[]
-  createdAt             DateTime                @default(now())
-  updatedAt             DateTime                @updatedAt
-  Enterprise            Enterprise[]            @relation("User")
-  OwnEnterprise         Enterprise[]            @relation("Creator")
-  Project               Project[]
-  Offer                 Offer[]
+  id            Int         @id @default(autoincrement())
+  sub           String
+  role          String      @default("user")
+  workPhone     String?
+  phone         String?
+  firstName     String
+  secondName    String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  POUOnUser     POUOnUser[]
+  initiatorIn   Project[]   @relation("initiator")
+  headIn        Project[]   @relation("head")
+  coordinatorIn Project[]   @relation("coordinator")
+  Offer         Offer[]
+  Event         Event[]
 
   @@index([sub])
 }
 
-model DemonstrationActivity {
+model POU {
+  id            Int         @id @default(autoincrement())
+  name          String
+  OPF           String
+  code          Int
+  district      String
+  createdAt     DateTime    @default(now())
+  POUOnUser     POUOnUser[]
+  unitPOU       Project[]   @relation("unitPOU")
+  recipientPOU  Project[]   @relation("recipientPOU")
+  eneficiaryPOU Project[]   @relation("eneficiaryPOU")
+  performerPOU  Project[]   @relation("performerPOU")
+  Offer         Offer[]
+}
+
+model POUOnUser {
+  id       Int    @id @default(autoincrement())
+  POU      POU    @relation(fields: [pOUId], references: [id])
+  user     User   @relation(fields: [userId], references: [id])
+  position String
+  pOUId    Int
+  userId   Int
+}
+
+model Project {
+  id              Int      @id @default(autoincrement())
+  number          Int
+  name            String
+  budget          Int
+  currency        Currency @relation(fields: [currencyId], references: [id])
+  start           DateTime
+  end             DateTime
+  donor           Donor    @relation(fields: [donorId], references: [id])
+  unitPOU         POU?     @relation("unitPOU", fields: [unitPOUId], references: [id])
+  recipientPOU    POU?     @relation("recipientPOU", fields: [recipientPOUId], references: [id])
+  eneficiaryPOU   POU?     @relation("eneficiaryPOU", fields: [eneficiaryPOUId], references: [id])
+  performerPOU    POU?     @relation("performerPOU", fields: [performerPOUId], references: [id])
+  goal            String
+  sector          Sector   @relation(fields: [sectorId], references: [id])
+  isPublic        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  //тут треба забрати знак питання
+  initiator       User?    @relation("initiator", fields: [initiatorId], references: [id])
+  head            User?    @relation("head", fields: [headId], references: [id])
+  coordinator     User?    @relation("coordinator", fields: [coordinatorId], references: [id])
+  photoId         Int
+  currencyId      Int
+  donorId         Int
+  unitPOUId       Int?
+  recipientPOUId  Int?
+  eneficiaryPOUId Int?
+  performerPOUId  Int?
+  sectorId        Int
+  initiatorId     Int?
+  headId          Int?
+  coordinatorId   Int?
+  Offer           Offer[]
+  Event           Event[]
+
+  @@index([number])
+}
+
+model Currency {
+  id      Int       @id @default(autoincrement())
+  name    String
+  ticker  String
+  Project Project[]
+}
+
+model Donor {
+  id      Int       @id @default(autoincrement())
+  name    String
+  Project Project[]
+}
+
+model Sector {
+  id      Int       @id @default(autoincrement())
+  name    String
+  Project Project[]
+}
+
+model Offer {
+  id          Int      @id @default(autoincrement())
+  description String
+  category    String
+  type        String
+  createdAt   DateTime @default(now())
+  isPublic    Boolean  @default(false)
+  POU         POU?     @relation(fields: [pOUId], references: [id])
+  pOUId       Int?
+  project     Project  @relation(fields: [projectId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  contractId  Int
+  projectId   Int
+}
+
+model Event {
   id             Int      @id @default(autoincrement())
   name           String
   date           DateTime
@@ -42,126 +135,16 @@ model DemonstrationActivity {
   type           String
   direction      String
   specialization String
+  createdAt      DateTime @default(now())
   isPublic       Boolean  @default(false)
   user           User     @relation(fields: [userId], references: [id])
+  project        Project  @relation(fields: [projectId], references: [id])
+  photoId        Int
   userId         Int
-  createdAt      DateTime @default(now())
-
-  @@index([userId])
+  projectId      Int
 }
 
-model POU {
-  id                 Int                  @id @default(autoincrement())
-  name               String
-  createdAt          DateTime             @default(now())
-  FarmSpecialization FarmSpecialization[]
-  user               User                 @relation(fields: [userId], references: [id])
-  userId             Int
-  Enterprise         Enterprise?
-  WebResource        WebResource[]
-  Offer              Offer[]
-
-  @@map("DemonstrationFarm")
-}
-
-model Specialization {
-  id                 Int                  @id @default(autoincrement())
-  name               String
-  FarmSpecialization FarmSpecialization[]
-  user               User?                @relation(fields: [userId], references: [id])
-  userId             Int?
-}
-
-model FarmSpecialization {
-  id                   Int                    @id @default(autoincrement())
-  areaOrPopulation     Float
-  Specialization       Specialization         @relation(fields: [specializationId], references: [id])
-  specializationId     Int
-  POU                  POU                    @relation(fields: [POUId], references: [id])
-  POUId                Int
-  AmountSpecialization AmountSpecialization[]
-}
-
-model AmountSpecialization {
-  id                   Int                @id @default(autoincrement())
-  year                 Int
-  amount               Float
-  FarmSpecialization   FarmSpecialization @relation(fields: [farmSpecializationId], references: [id])
-  farmSpecializationId Int
-}
-
-model Trainer {
-  id        Int         @id @default(autoincrement())
-  name      String
-  direction String
-  contact   String
-  createdAt DateTime    @default(now())
-  user      User        @relation(fields: [userId], references: [id])
-  userId    Int
-  Direction Direction[]
-}
-
-model Direction {
-  id      Int       @id @default(autoincrement())
-  name    String
-  Trainer Trainer[]
-  user    User?     @relation(fields: [userId], references: [id])
-  userId  Int?
-}
-
-model Enterprise {
-  id                  Int    @id @default(autoincrement())
-  // name                String
-  code                Int    @unique
-  district            String
-  village             String
-  // pagesOnInternet     String
-  // pagesOnNetworks     String
-  DemonstrationFarm   POU    @relation(fields: [demonstrationFarmId], references: [id])
-  Creator             User   @relation("Creator", fields: [creatorId], references: [id])
-  creatorId           Int
-  User                User?  @relation("User", fields: [userId], references: [id])
-  userId              Int?
-  Region              Region @relation(fields: [regionId], references: [id])
-  regionId            Int
-  demonstrationFarmId Int    @unique
-
-  @@index([userId, regionId, demonstrationFarmId, code])
-}
-
-model Region {
-  id         Int          @id @default(autoincrement())
-  name       String
-  Enterprise Enterprise[]
-}
-
-model WebResource {
-  id                  Int    @id @default(autoincrement())
-  name                String
-  link                String
-  type                String
-  DemonstrationFarm   POU    @relation(fields: [demonstrationFarmId], references: [id])
-  demonstrationFarmId Int
-}
-
-model Project {
-  id       Int     @id @default(autoincrement())
-  name     String
-  goal     String
-  user     User    @relation(fields: [userId], references: [id])
-  userId   Int
-  isPublic Boolean @default(false)
-}
-
-model Offer {
-  id          Int      @id @default(autoincrement())
-  description String
-  POU         POU?     @relation(fields: [pOUId], references: [id])
-  pOUId       Int?
-  category    String
-  type        String
-  createdAt   DateTime @default(now())
-  user        User     @relation(fields: [userId], references: [id])
-  userId      Int
-  isPublic    Boolean  @default(false)
+model Contract {
+  id         Int @id @default(autoincrement())
+  templateId Int
 }

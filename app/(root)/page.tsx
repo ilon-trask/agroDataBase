@@ -5,7 +5,7 @@ import Div from "@/components/ui/Div";
 import MyContainer from "@/components/ui/MyContainer";
 import DemonstrationFarmsTable from "./(components)/DemonstrationFarmsTable";
 import prismadb from "@/lib/prismadb";
-import { DemonstrationActivityWithUser } from "@/types/DemonstrationActivitiesTypes";
+import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
 import { POUWithSpecialization } from "@/types/DemonstrationFarmsTypes";
 import { getDemonstrationFarms } from "@/hooks/getDemonstrationFarms";
 import AdvisoryServicesTable from "./(components)/AdvisoryServicesTable";
@@ -22,12 +22,11 @@ import { OfferWithUserAndPOU } from "@/types/OfferTypes";
 import getOffersPublic from "@/hooks/getOffersPublic";
 
 export default async function Home() {
-  const activities: DemonstrationActivityWithUser[] | null =
-    await prismadb.demonstrationActivity.findMany({
-      include: { user: true },
-    });
+  const activities: EventWithUser[] | null = await prismadb.event.findMany({
+    include: { user: true },
+  });
   const farms: POUWithSpecialization[] = await getDemonstrationFarms();
-  const regions = await getRegions();
+  // const regions = await getRegions();
   const supabase = createServerClient();
   const {
     data: { user },
@@ -44,12 +43,12 @@ export default async function Home() {
               <Div>
                 <MyText>Фільтри</MyText>
               </Div>
-              <Div>
+              {/* <Div>
                 <DemonstrationActivitiesTable
                   activities={activities}
                   isCabinet={false}
                 />
-              </Div>
+              </Div> */}
             </Div>
             <MyHeading>Демонстраційні ферми</MyHeading>
             <Div display={"grid"} gridTemplateColumns={"1fr 3fr"}>
@@ -100,7 +99,7 @@ export default async function Home() {
         <NonAuthMainPage
           activities={activities}
           farms={farms}
-          regions={regions}
+          // regions={regions}
           projects={projects}
           offers={offers}
         />

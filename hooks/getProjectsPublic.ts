@@ -5,10 +5,8 @@ export default async function getProjectPublic(): Promise<
   ProjectWithUser[] | []
 > {
   const projects = await prismadb.project.findMany({
-    include: { user: true },
-    where: {
-      isPublic: true,
-    },
+    include: { initiator: true },
+    where: { isPublic: true },
     orderBy: { id: "asc" },
   });
   return projects;

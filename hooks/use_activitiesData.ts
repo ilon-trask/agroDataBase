@@ -1,10 +1,10 @@
-import { DemonstrationActivityWithUser } from "@/types/DemonstrationActivitiesTypes";
+import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
 
 import { create } from "zustand";
 interface useActivitiesData {
-  activities: DemonstrationActivityWithUser[] | [];
-  setActivities: (activities: DemonstrationActivityWithUser[]) => void;
-  setNewActivities: (activity: DemonstrationActivityWithUser) => void;
+  activities: EventWithUser[] | [];
+  setActivities: (activities: EventWithUser[]) => void;
+  setNewActivities: (activity: EventWithUser) => void;
 }
 
 export const useActivitiesData = create<useActivitiesData>((set) => ({

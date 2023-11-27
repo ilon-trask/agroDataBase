@@ -4,11 +4,11 @@ import MyButton from "@/components/ui/MyButton";
 import React, { useState } from "react";
 import DemonstrationActivitiesDialog from "./DemonstrationActivitiesDialog/DemonstrationActivitiesDialog";
 
-import { DemonstrationActivityWithUser } from "@/types/DemonstrationActivitiesTypes";
+import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
 export default function DemonstrationActivitiesSection({
   activities,
 }: {
-  activities: DemonstrationActivityWithUser[];
+  activities: EventWithUser[];
 }) {
   const [isUpdate, steIsUpdate] = useState(false);
   const [isOpen, setIsOpen] = useState(false);

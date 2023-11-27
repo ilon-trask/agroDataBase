@@ -1,4 +1,4 @@
-import { DemonstrationActivityWithUser } from "@/types/DemonstrationActivitiesTypes";
+import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
 import { POUWithSpecialization } from "@/types/DemonstrationFarmsTypes";
 
 import { create } from "zustand";

@@ -13,6 +13,7 @@ import {
 import React, { Dispatch, SetStateAction } from "react";
 import ProjectServeActions from "../cabinet/(components)/ProjectSection/ServerProjectCreate";
 import ProjectPublish from "../cabinet/(components)/ProjectSection/ServerProjectPublish";
+import MyTh from "@/components/ui/MyTh";
 
 function ProjectTable({
   projectsData,
@@ -26,9 +27,9 @@ function ProjectTable({
       <Table>
         <Thead>
           <Tr>
-            <Th>Назва</Th>
-            <Th>Мета</Th>
-            <Th></Th>
+            <MyTh>Назва</MyTh>
+            <MyTh>Мета</MyTh>
+            <MyTh></MyTh>
           </Tr>
         </Thead>
         <Tbody>

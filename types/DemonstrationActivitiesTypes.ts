@@ -1,4 +1,4 @@
-import { DemonstrationActivity, User } from "@prisma/client";
-export interface DemonstrationActivityWithUser extends DemonstrationActivity {
+import { Event, User } from "@prisma/client";
+export interface EventWithUser extends Event {
   user: User;
 }

@@ -1,10 +1,8 @@
 import prismadb from "@/lib/prismadb";
-import { DemonstrationActivityWithUser } from "@/types/DemonstrationActivitiesTypes";
+import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
 
-export default async function getEventsPublic(): Promise<
-  DemonstrationActivityWithUser[] | []
-> {
-  const events = await prismadb.demonstrationActivity.findMany({
+export default async function getEventsPublic(): Promise<EventWithUser[] | []> {
+  const events = await prismadb.event.findMany({
     include: { user: true },
     where: {
       isPublic: true,

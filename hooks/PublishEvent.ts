@@ -1,12 +1,12 @@
 "use server";
 
 import prismadb from "@/lib/prismadb";
-import { DemonstrationActivityWithUser } from "@/types/DemonstrationActivitiesTypes";
+import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
 
 export default async function PublishEvent(
   id: number,
   isPublic: boolean
-): Promise<DemonstrationActivityWithUser> {
+): Promise<EventWithUser> {
   const res = await prismadb.demonstrationActivity.update({
     where: { id },
     data: {

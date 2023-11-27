@@ -5,7 +5,7 @@ import CheckPrismaUser from "./CheckPrismaUser";
 import DemonstrationActivitiesSection from "./(components)/DemonstrationActivitiesSection/DemonstrationActivitiesSection";
 import prismadb from "@/lib/prismadb";
 import createServerClient from "@/lib/createServerClient";
-import { DemonstrationActivityWithUser } from "@/types/DemonstrationActivitiesTypes";
+import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
 import { POUWithSpecialization } from "@/types/DemonstrationFarmsTypes";
 import DemonstrationFarmsSection from "./(components)/DemonstrationFarmsSection/DemonstrationFarmsSection";
 import UserDataSection from "./(components)/UserDataSection/UserDataSection";
@@ -14,6 +14,7 @@ import ProjectSection from "./(components)/ProjectSection/ProjectSection";
 import { ProjectWithUser } from "../../../types/ProjectTypes";
 import OfferSection from "./(components)/OfferSection/OfferSection";
 import { OfferWithUserAndPOU } from "@/types/OfferTypes";
+import Div from "@/components/ui/Div";
 
 export default async function Page() {
   const supabase = createServerClient();
@@ -25,7 +26,7 @@ export default async function Page() {
     where: { sub: user.id },
   });
   if (!prismaUser) throw new Error("немає прізма юзера");
-  const activities: DemonstrationActivityWithUser[] | [] =
+  const activities: EventWithUser[] | [] =
     await prismadb.demonstrationActivity.findMany({
       include: { user: true },
       where: { user: { sub: user.id } },
@@ -47,14 +48,30 @@ export default async function Page() {
       <CheckPrismaUser />
       <MyHeading>Персональний кабінет</MyHeading>
       <UserDataSection user={user} prismaUser={prismaUser} />
-      <MyHeading>Мої проекти</MyHeading>
-      <ProjectSection projects={projects} />
-      <MyHeading>Мої заходи</MyHeading>
-      <DemonstrationActivitiesSection activities={activities} />
-      <MyHeading>Мої підприємства, організації, установи</MyHeading>
-      <DemonstrationFarmsSection farms={farms} />
-      <MyHeading>Мої пропозиції партнерства</MyHeading>
-      <OfferSection offers={offers} />
+      <MyHeading textAlign={"left"} mt={"160px"}>
+        Мої проекти
+      </MyHeading>
+      <Div mt={"90px"}>
+        <ProjectSection projects={projects} />
+      </Div>
+      <MyHeading textAlign={"left"} mt={"160px"}>
+        Мої заходи
+      </MyHeading>
+      <Div mt={"90px"}>
+        <DemonstrationActivitiesSection activities={activities} />
+      </Div>
+      <MyHeading textAlign={"left"} mt={"160px"}>
+        Мої підприємства, організації, установи
+      </MyHeading>
+      <Div mt={"90px"}>
+        <DemonstrationFarmsSection farms={farms} />
+      </Div>
+      <MyHeading textAlign={"left"} mt={"160px"}>
+        Мої пропозиції партнерства
+      </MyHeading>
+      <Div mt={"90px"}>
+        <OfferSection offers={offers} />
+      </Div>
     </MyContainer>
   );
 }

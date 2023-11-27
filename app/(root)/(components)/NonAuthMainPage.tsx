@@ -4,8 +4,8 @@ import MyContainer from "@/components/ui/MyContainer";
 import React, { useRef } from "react";
 import MyHeading from "@/components/ui/MyHeading";
 import MyButton from "@/components/ui/MyButton";
-import { DemonstrationActivityWithUser } from "@/types/DemonstrationActivitiesTypes";
-import { Region } from "@prisma/client";
+import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
+// import { Region } from "@prisma/client";
 import { POUWithSpecialization } from "@/types/DemonstrationFarmsTypes";
 import Title from "@/components/ui/Title";
 import {
@@ -62,13 +62,13 @@ function offerCard(el: OfferWithUserAndPOU) {
 
 export default function NonAuthMainPage({
   activities,
-  regions,
+  // regions,
   farms,
   projects,
   offers,
 }: {
-  activities: DemonstrationActivityWithUser[];
-  regions: Region[];
+  activities: EventWithUser[];
+  // regions: Region[];
   farms: POUWithSpecialization[];
   projects: ProjectWithUser[];
   offers: OfferWithUserAndPOU[];
@@ -124,24 +124,6 @@ export default function NonAuthMainPage({
         </Flex>
         <Flex
           justifyContent={"space-between"}
-          mt={"280px"}
-          alignItems={"center"}
-        >
-          <MyHeading>Рекомендовані заходи</MyHeading>
-          <Div
-            cursor={"pointer"}
-            onClick={() => {
-              router.push("/events");
-            }}
-          >
-            <ArrowIcon />
-          </Div>
-        </Flex>
-        <Div mt={"90px"}>
-          <EventContent events={activities} />
-        </Div>
-        <Flex
-          justifyContent={"space-between"}
           mt={"160px"}
           alignItems={"center"}
         >
@@ -160,10 +142,29 @@ export default function NonAuthMainPage({
         </Div>
         <Flex
           justifyContent={"space-between"}
+          mt={"280px"}
+          alignItems={"center"}
+        >
+          <MyHeading>Рекомендовані заходи</MyHeading>
+          <Div
+            cursor={"pointer"}
+            onClick={() => {
+              router.push("/events");
+            }}
+          >
+            <ArrowIcon />
+          </Div>
+        </Flex>
+        <Div mt={"90px"}>
+          <EventContent events={activities} />
+        </Div>
+
+        <Flex
+          justifyContent={"space-between"}
           mt={"160px"}
           alignItems={"center"}
         >
-          <MyHeading>Рекомендовані покупці</MyHeading>
+          <MyHeading>Рекомендовані пропозиції</MyHeading>
           <ArrowIcon />
         </Flex>
         <Div mt={"90px"}>
@@ -181,7 +182,7 @@ export default function NonAuthMainPage({
           mt={"160px"}
           alignItems={"center"}
         >
-          <MyHeading>Рекомендовані продавці</MyHeading>
+          <MyHeading>Рекомендовані договори</MyHeading>
           <ArrowIcon />
         </Flex>
         <Div mt={"90px"}>
