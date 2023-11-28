@@ -47,6 +47,7 @@ export default function Page() {
     if (!error) {
       await supabase.auth.getSession();
       router.push("/");
+      router.refresh();
       setUser(data.user);
       //   location.reload();
     }

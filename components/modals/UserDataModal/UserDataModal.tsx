@@ -7,9 +7,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
-  FormLabel,
   Input,
-  Flex,
   Grid,
 } from "@chakra-ui/react";
 import onSubmit from "./onSubmit";
@@ -25,9 +23,9 @@ export type PrismaUserData = {
   id?: number;
   firstName: string;
   secondName: string;
-  workPhone: string | null;
+  // workPhone: string | null;
   phone: string | null;
-  position: string | null;
+  // position: string | null;
 };
 
 export default function UserDataModal({
@@ -50,9 +48,9 @@ export default function UserDataModal({
     defaultValues: {
       firstName: "",
       secondName: "",
-      workPhone: null,
+      // workPhone: null,
       phone: null,
-      position: null,
+      // position: null,
     },
   });
   const router = useRouter();
@@ -91,7 +89,7 @@ export default function UserDataModal({
               <ErrorText>{errors["secondName"].message}</ErrorText>
             ) : null}
           </Div>
-          <Div>
+          {/* <Div>
             <Grid alignItems={"center"} templateColumns={"1fr 1fr"}>
               <MyText>Робочий телефон</MyText>
               <Input
@@ -103,7 +101,7 @@ export default function UserDataModal({
             {errors["workPhone"] ? (
               <ErrorText>{errors["workPhone"].message}</ErrorText>
             ) : null}
-          </Div>
+          </Div> */}
           <Div>
             <Grid alignItems={"center"} templateColumns={"1fr 1fr"}>
               <MyText>Контактний телефон</MyText>
@@ -113,7 +111,7 @@ export default function UserDataModal({
               <ErrorText>{errors["phone"].message}</ErrorText>
             ) : null}
           </Div>
-          <Div>
+          {/* <Div>
             <Grid alignItems={"center"} templateColumns={"1fr 1fr"}>
               <MyText>Посада</MyText>
               <Input {...register("position")} />
@@ -121,7 +119,7 @@ export default function UserDataModal({
             {errors["position"] ? (
               <ErrorText>{errors["position"].message}</ErrorText>
             ) : null}
-          </Div>
+          </Div> */}
         </ModalBody>
         <ModalFooter>
           <MyButton type="submit">Збегерти</MyButton>

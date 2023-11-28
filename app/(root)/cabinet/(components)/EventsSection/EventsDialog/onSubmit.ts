@@ -1,15 +1,16 @@
 "use server";
 
 import prismadb from "@/lib/prismadb";
-import { Activities } from "./DemonstrationActivitiesDialog";
+import { Activities } from "./EventsDialog";
+import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
 
 export default async function onSubmit(
   data: Activities,
   update: boolean,
   userId: number
-) {
+): Promise<EventWithUser | undefined | null> {
   if (!update) {
-    const res = await prismadb.demonstrationActivity.create({
+    const res = await prismadb.event.create({
       data: {
         ...data,
         date: new Date(data.date),
@@ -17,6 +18,7 @@ export default async function onSubmit(
       },
       include: { user: true },
     });
+
     return res;
   } else {
   }

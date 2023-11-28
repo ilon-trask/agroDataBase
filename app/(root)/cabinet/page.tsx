@@ -2,7 +2,7 @@ import MyContainer from "@/components/ui/MyContainer";
 import MyHeading from "@/components/ui/MyHeading";
 import React from "react";
 import CheckPrismaUser from "./CheckPrismaUser";
-import DemonstrationActivitiesSection from "./(components)/DemonstrationActivitiesSection/DemonstrationActivitiesSection";
+import EventsSection from "./(components)/EventsSection/EventsSection";
 import prismadb from "@/lib/prismadb";
 import createServerClient from "@/lib/createServerClient";
 import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
@@ -26,16 +26,15 @@ export default async function Page() {
     where: { sub: user.id },
   });
   if (!prismaUser) throw new Error("немає прізма юзера");
-  const activities: EventWithUser[] | [] =
-    await prismadb.demonstrationActivity.findMany({
-      include: { user: true },
-      where: { user: { sub: user.id } },
-      orderBy: { id: "asc" },
-    });
-  const farms: POUWithSpecialization[] = await getDemonstrationFarms();
-  const projects: ProjectWithUser[] = await prismadb.project.findMany({
+  const events: EventWithUser[] | [] = await prismadb.event.findMany({
     include: { user: true },
     where: { user: { sub: user.id } },
+    orderBy: { id: "asc" },
+  });
+  const farms: POUWithSpecialization[] = await getDemonstrationFarms();
+  const projects: ProjectWithUser[] = await prismadb.project.findMany({
+    include: { initiator: true },
+    where: { initiator: { sub: user.id } },
     orderBy: { id: "asc" },
   });
   const offers: OfferWithUserAndPOU[] = await prismadb.offer.findMany({
@@ -49,6 +48,9 @@ export default async function Page() {
       <MyHeading>Персональний кабінет</MyHeading>
       <UserDataSection user={user} prismaUser={prismaUser} />
       <MyHeading textAlign={"left"} mt={"160px"}>
+        Зайнятість
+      </MyHeading>
+      <MyHeading textAlign={"left"} mt={"160px"}>
         Мої проекти
       </MyHeading>
       <Div mt={"90px"}>
@@ -58,7 +60,7 @@ export default async function Page() {
         Мої заходи
       </MyHeading>
       <Div mt={"90px"}>
-        <DemonstrationActivitiesSection activities={activities} />
+        <EventsSection activities={events} />
       </Div>
       <MyHeading textAlign={"left"} mt={"160px"}>
         Мої підприємства, організації, установи

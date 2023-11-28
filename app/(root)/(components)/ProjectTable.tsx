@@ -1,6 +1,7 @@
 "use client";
 import { ProjectWithUser } from "@/types/ProjectTypes";
 import {
+  Button,
   Checkbox,
   Table,
   TableContainer,
@@ -14,6 +15,9 @@ import React, { Dispatch, SetStateAction } from "react";
 import ProjectServeActions from "../cabinet/(components)/ProjectSection/ServerProjectCreate";
 import ProjectPublish from "../cabinet/(components)/ProjectSection/ServerProjectPublish";
 import MyTh from "@/components/ui/MyTh";
+import { useRouter } from "next/navigation";
+import { DeleteIcon } from "@chakra-ui/icons";
+import MyDeleteIcon from "@/components/ui/Icons/MyDeleteIcon";
 
 function ProjectTable({
   projectsData,
@@ -22,6 +26,7 @@ function ProjectTable({
   projectsData: ProjectWithUser[] | [];
   setProjectsData: Dispatch<SetStateAction<ProjectWithUser[]>>;
 }) {
+  const router = useRouter();
   return (
     <TableContainer maxW={"1100px"} mx={"auto"}>
       <Table>
@@ -30,6 +35,8 @@ function ProjectTable({
             <MyTh>Назва</MyTh>
             <MyTh>Мета</MyTh>
             <MyTh></MyTh>
+            <MyTh></MyTh>
+            <MyTh></MyTh>
           </Tr>
         </Thead>
         <Tbody>
@@ -37,6 +44,11 @@ function ProjectTable({
             <Tr key={el.id}>
               <Td>{el.name}</Td>
               <Td>{el.goal}</Td>
+              <Td>
+                <Button onClick={() => router.push("/project/" + el.id)}>
+                  Докладніше
+                </Button>
+              </Td>
               <Td>
                 <Checkbox
                   isChecked={el.isPublic}
@@ -53,6 +65,9 @@ function ProjectTable({
                 >
                   Опублікувати
                 </Checkbox>
+              </Td>
+              <Td>
+                <MyDeleteIcon />
               </Td>
             </Tr>
           ))}

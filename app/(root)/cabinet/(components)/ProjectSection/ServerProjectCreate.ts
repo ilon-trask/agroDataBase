@@ -9,10 +9,11 @@ async function ServerProjectCreate(data: ProjectCreateData, user: User) {
   const res: ProjectWithUser = await prismadb.project.create({
     data: {
       ...data,
-      userId: user.id,
+      initiatorId: user.id,
     },
-    include: { user: true },
+    include: { initiator: true },
   });
+
   return res;
 }
 

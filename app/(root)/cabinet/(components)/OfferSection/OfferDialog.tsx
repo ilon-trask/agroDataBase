@@ -45,9 +45,9 @@ export default function OfferDialog({
     },
   });
   const onSubmit = async (data: OfferCreateType) => {
-    const res = await CreateOffer(data, prismaUser);
-    setOffersData((prev) => [...prev, res]);
-    setIsOpen(false);
+    // const res = await CreateOffer(data, prismaUser);
+    // setOffersData((prev) => [...prev, res]);
+    // setIsOpen(false);
   };
   return (
     <>

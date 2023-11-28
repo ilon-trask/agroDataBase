@@ -26,7 +26,7 @@ import {
   FarmDataDialogContent,
   FarmDataType,
 } from "../../../../farmDataView/[farmId]/components/FarmDataSection/component/FarmDataDialog/FarmDataDialog";
-import { POU, Region, User as PrismaUser } from "@prisma/client";
+import { POU, User as PrismaUser } from "@prisma/client";
 import { User } from "@supabase/auth-helpers-nextjs";
 import MyHeading from "@/components/ui/MyHeading";
 
@@ -99,12 +99,10 @@ export const Specializations = [
 
 export default function Quiz({
   farm,
-  regions,
   prismaUser,
   user,
 }: {
   farm: POU;
-  regions: Region[] | [];
   prismaUser: PrismaUser | null;
   user: User | null;
 }) {
@@ -154,7 +152,7 @@ export default function Quiz({
               errors={farmDataForm.formState.errors}
               register={farmDataForm.register}
               farm={farm}
-              regions={regions}
+              // regions={regions}
               prismaUser={prismaUser}
               user={user}
             />

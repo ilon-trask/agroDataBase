@@ -12,8 +12,8 @@ function EventContent() {
   };
   return (
     <Div>
-      <MyHeading>Сторінка заходу</MyHeading>
-      <MyButton onClick={handleGoBack}>Повернутись</MyButton>
+      {/* <MyHeading>Сторінка заходу</MyHeading>
+      <MyButton onClick={handleGoBack}>Повернутись</MyButton> */}
     </Div>
   );
 }

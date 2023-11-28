@@ -15,7 +15,7 @@ export default async function Home({ params }: { params: { farmId: string } }) {
   );
   if (!farm) throw new Error("не має ферми з таким id");
 
-  const regions = await getRegions();
+  // const regions = await getRegions();
   const supabase = createServerClient();
   const {
     data: { user },
@@ -30,7 +30,7 @@ export default async function Home({ params }: { params: { farmId: string } }) {
       </MyHeading>
       <FarmDataSection
         farm={farm}
-        regions={regions}
+        // regions={regions}
         farmId={params.farmId}
         prismaUserData={prismaUserData}
         user={user}

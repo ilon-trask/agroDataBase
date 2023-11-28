@@ -2,10 +2,10 @@
 import DemonstrationActivitiesTable from "@/app/(root)/(components)/DemonstrationActivitiesTable";
 import MyButton from "@/components/ui/MyButton";
 import React, { useState } from "react";
-import DemonstrationActivitiesDialog from "./DemonstrationActivitiesDialog/DemonstrationActivitiesDialog";
+import DemonstrationActivitiesDialog from "./EventsDialog/EventsDialog";
 
 import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
-export default function DemonstrationActivitiesSection({
+export default function EventsSection({
   activities,
 }: {
   activities: EventWithUser[];

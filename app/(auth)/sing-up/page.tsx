@@ -11,8 +11,9 @@ import Image from "next/image";
 export default function Page() {
   return (
     <Box>
+      <MyHeading>Сторінка реєстрації</MyHeading>
       <Box
-        backgroundImage={"/sing_up_bg.jpg"}
+        // backgroundImage={"/sing_up_bg.jpg"}
         backgroundColor={"rgba(0, 0, 0, 0.5)"}
         backgroundRepeat={"no-repeat"}
         w={"100%"}
@@ -22,12 +23,9 @@ export default function Page() {
         justifyContent={"space-evenly"}
         alignItems={"center"}
       >
-        <MyHeading color={"white"}>
-          Реєстрація дає доступ <br />
-          розширеного сортування <br />
-          під ваші побажання
-        </MyHeading>
+        <Box></Box>
         <Box
+          ml={"1000px"}
           w={"300px"}
           bg={"white"}
           p={"10px"}
@@ -92,8 +90,8 @@ export default function Page() {
           </Box>
         </Box>
       </Box>
-      <Box bgColor={"#289D4E"}>
-        <MyContainer>
+      <Box bgColor={"#289D4E"} height={"20px"}>
+        {/* <MyContainer>
           <Text color={"white"}>
             Для реєстрації необхідно: <br />
             1. Написати адресу електронної пошти
@@ -106,16 +104,17 @@ export default function Page() {
             5. Відкрити лист і перейти запосиланням
             <br />
           </Text>
-        </MyContainer>
+        </MyContainer> */}
       </Box>
       <MyContainer>
         <Box display="flex" justifyContent={"space-between"} mt={"100px"}>
-          <Image
+          <Box width={500} height={500}></Box>
+          {/* <Image
             src={"/sing_up_content.png"}
             alt="контент"
             width={500}
             height={500}
-          />
+          /> */}
           <Box>
             <MyHeading mt={"30px"}>Доступ до Інформації 24/7</MyHeading>
             <Text mt={4}>
@@ -133,20 +132,22 @@ export default function Page() {
               інформацію за побажаннями користувача
             </Text>
           </Box>
-          <Image
+          {/* <Image
             src={"/sing_up_content_2.png"}
             alt="контент"
             width={500}
             height={500}
-          />
+          /> */}{" "}
+          <Box width={500} height={500}></Box>
         </Box>
         <Box display="flex" justifyContent={"space-between"} mt={"100px"}>
-          <Image
+          {/* <Image
             src={"/sing_up_content.png"}
             alt="контент"
             width={500}
             height={500}
-          />
+          /> */}
+          <Box width={500} height={500}></Box>
           <Box>
             <MyHeading mt={"30px"}>
               Можливість коментувати і отримувати консультації

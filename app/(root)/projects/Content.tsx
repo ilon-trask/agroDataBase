@@ -58,7 +58,7 @@ function Content({ projects }: { projects: ProjectWithUser[] }) {
                   <Heading size="lg" color={colors.primaryColor}>
                     {el.name}
                   </Heading>
-                  <MyText mt={2}>Мета: {el.goal}</MyText>
+                  {/* <MyText mt={2}>Мета: {el.goal}</MyText> */}
                   {/* <MyText mt={2}>Керівник: {el.goal}</MyText> */}
                   {/* <MyText>Координатор: {el.goal}</MyText> */}
                   {/* <MyText>Статус: {el.goal}</MyText> */}

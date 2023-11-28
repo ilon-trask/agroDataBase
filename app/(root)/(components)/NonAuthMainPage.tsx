@@ -27,56 +27,17 @@ import { ProjectWithUser } from "@/types/ProjectTypes";
 import { OfferWithUserAndPOU } from "@/types/OfferTypes";
 import MyText from "@/components/ui/MyText";
 import { useRouter } from "next/navigation";
-
-function offerCard(el: OfferWithUserAndPOU) {
-  return (
-    <Card maxW="sm" key={el.id}>
-      <CardBody>
-        <Stack mt="2" spacing="1">
-          <Heading size="lg" color={colors.primaryColor}>
-            {el.description}
-          </Heading>
-          <MyText mt={2}>Контактна особо: {el.user.firstName}</MyText>
-          <MyText>ПОУ: {el.POU?.name || "Особиста пропозиція"}</MyText>
-          <MyText>Статус: {}</MyText>
-        </Stack>
-      </CardBody>
-      <Divider />
-      <CardFooter>
-        <ButtonGroup spacing="2">
-          <MyButton variant="solid" colorScheme="blue">
-            Зв'язатись
-          </MyButton>
-          <MyButton
-            variant="ghost"
-            colorScheme="blue"
-            // onClick={() => router.push("/project/" + el.id)}
-          >
-            Докладніше
-          </MyButton>
-        </ButtonGroup>
-      </CardFooter>
-    </Card>
-  );
-}
+import PageContent from "./PageContent";
 
 export default function NonAuthMainPage({
-  activities,
-  // regions,
-  farms,
+  events,
   projects,
   offers,
 }: {
-  activities: EventWithUser[];
-  // regions: Region[];
-  farms: POUWithSpecialization[];
+  events: EventWithUser[];
   projects: ProjectWithUser[];
   offers: OfferWithUserAndPOU[];
 }) {
-  const activitiesRef = useRef<HTMLElement>();
-  const farmRef = useRef<HTMLElement>();
-  const coachRef = useRef<HTMLElement>();
-  const communityRef = useRef<HTMLElement>();
   const router = useRouter();
   return (
     <>
@@ -122,83 +83,7 @@ export default function NonAuthMainPage({
           <MyButton>Спробувати</MyButton>
           <MyButton variant={"outline"}>Дізнатися більше</MyButton>
         </Flex>
-        <Flex
-          justifyContent={"space-between"}
-          mt={"160px"}
-          alignItems={"center"}
-        >
-          <MyHeading>Рекомендовані проекти</MyHeading>
-          <Div
-            cursor={"pointer"}
-            onClick={() => {
-              router.push("/projects");
-            }}
-          >
-            <ArrowIcon />
-          </Div>
-        </Flex>
-        <Div mt={"90px"}>
-          <ProjectsContent projects={projects} />
-        </Div>
-        <Flex
-          justifyContent={"space-between"}
-          mt={"280px"}
-          alignItems={"center"}
-        >
-          <MyHeading>Рекомендовані заходи</MyHeading>
-          <Div
-            cursor={"pointer"}
-            onClick={() => {
-              router.push("/events");
-            }}
-          >
-            <ArrowIcon />
-          </Div>
-        </Flex>
-        <Div mt={"90px"}>
-          <EventContent events={activities} />
-        </Div>
-
-        <Flex
-          justifyContent={"space-between"}
-          mt={"160px"}
-          alignItems={"center"}
-        >
-          <MyHeading>Рекомендовані пропозиції</MyHeading>
-          <ArrowIcon />
-        </Flex>
-        <Div mt={"90px"}>
-          <Flex justifyContent={"space-between"}>
-            <Div width={"20%"}></Div>
-            <Div width={"75%"}>
-              {offers
-                .filter((el) => el.type == "Купівля")
-                .map((el) => offerCard(el))}
-            </Div>
-          </Flex>
-        </Div>
-        <Flex
-          justifyContent={"space-between"}
-          mt={"160px"}
-          alignItems={"center"}
-        >
-          <MyHeading>Рекомендовані договори</MyHeading>
-          <ArrowIcon />
-        </Flex>
-        <Div mt={"90px"}>
-          <Flex justifyContent={"space-between"}>
-            <Div width={"20%"}></Div>
-            <Div width={"75%"}>
-              {offers
-                .filter((el) => el.type == "Продаж")
-                .map((el) => offerCard(el))}
-            </Div>
-          </Flex>
-        </Div>
-        <MyHeading mt={"160px"} textAlign={"left"}>
-          Про нас
-        </MyHeading>
-        <Div mt={"160px"}></Div>
+        <PageContent events={events} offers={offers} projects={projects} />
       </MyContainer>
     </>
   );

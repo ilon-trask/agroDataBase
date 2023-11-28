@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import EventContent from "./EventContent";
 
 async function page({ params: { eventId } }: { params: { eventId: number } }) {
-  const event = await prismadb.demonstrationActivity.findFirst({
+  const event = await prismadb.event.findFirst({
     where: { id: +eventId },
     include: { user: true },
   });

@@ -3,6 +3,6 @@
 import prismadb from "@/lib/prismadb";
 
 export default function getSpecialization() {
-  const res = prismadb.specialization.findMany();
-  return res;
+  // const res = prismadb..findMany();
+  // return res;
 }

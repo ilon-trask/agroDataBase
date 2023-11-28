@@ -18,7 +18,6 @@ import { useActivitiesData } from "@/hooks/use_activitiesData";
 import getDistricts from "@/hooks/getDistricts";
 import getEventTypes from "@/hooks/getEventTypes";
 import getEventsDirections from "@/hooks/getEventsDirections";
-import getEventsSpecialization from "@/hooks/getEventsSpecialization";
 export type Activities = {
   date: string;
   name: string;

@@ -8,7 +8,7 @@ async function ProjectPublish(id: number, isPublic: boolean) {
       isPublic,
     },
     where: { id },
-    include: { user: true },
+    include: { initiator: true },
   });
   return res;
 }

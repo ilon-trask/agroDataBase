@@ -7,11 +7,9 @@ export default async function PublishEvent(
   id: number,
   isPublic: boolean
 ): Promise<EventWithUser> {
-  const res = await prismadb.demonstrationActivity.update({
+  const res = await prismadb.event.update({
     where: { id },
-    data: {
-      isPublic,
-    },
+    data: { isPublic },
     include: { user: true },
   });
 

@@ -12,7 +12,7 @@ import {
   ModalHeader,
   Select,
 } from "@chakra-ui/react";
-import { POU, Enterprise, Region, User as PrismaUser } from "@prisma/client";
+import { POU, User as PrismaUser } from "@prisma/client";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import {
   useForm,
@@ -52,15 +52,15 @@ export function FarmDataDialogContent({
   control,
   farm,
   user,
-  regions,
-}: {
+}: // regions,
+{
   register: UseFormRegister<FarmDataType>;
   prismaUser: PrismaUser | null | undefined;
   errors: FieldErrors<FarmDataType>;
   control: Control<FarmDataType, any>;
   farm: POU;
   user: User | null;
-  regions: Region[] | [];
+  // regions: Region[] | [];
 }) {
   return (
     <form>
@@ -100,11 +100,11 @@ export function FarmDataDialogContent({
               <option value="" defaultChecked hidden>
                 Виберіть опцію
               </option>
-              {regions.map((el) => (
+              {/* {regions.map((el) => (
                 <option value={+el.id} key={el.id}>
                   {el.name}
                 </option>
-              ))}
+              ))} */}
             </Select>
           </Div>
         </Grid>
@@ -170,12 +170,12 @@ export function FarmDataDialogContent({
             <Div>{prismaUser?.firstName + " " + prismaUser?.secondName}</Div>
           </Grid>
         </Div>
-        <Div>
+        {/* <Div>
           <Grid alignItems={"center"} templateColumns={"1fr 1fr"} gap={3}>
             <MyText> Посада контактної особи</MyText>
             <Div>{prismaUser?.position}</Div>
           </Grid>
-        </Div>
+        </Div> */}
         <Div>
           <Grid alignItems={"center"} templateColumns={"1fr 1fr"} gap={3}>
             <MyText> Робочий телефон</MyText>
@@ -238,15 +238,15 @@ export const FarmDataValidator = z.object({
 export default function FarmDataDialog({
   isOpen,
   setIsOpen,
-  regions,
+  // regions,
   farm,
-  enterprise,
-}: {
+}: // enterprise,
+{
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  regions: Region[] | [];
+  // regions: Region[] | [];
   farm: POU;
-  enterprise?: Enterprise | null;
+  // enterprise?: Enterprise | null;
 }) {
   const {
     register,
@@ -262,14 +262,14 @@ export default function FarmDataDialog({
       village: "",
     },
     //@ts-ignore
-    values: enterprise
-      ? { ...enterprise, contacts: [] }
-      : {
-          code: "",
-          regionId: "",
-          district: "",
-          village: "",
-        },
+    // values: enterprise
+    //   ? { ...enterprise, contacts: [] }
+    //   : {
+    //       code: "",
+    //       regionId: "",
+    //       district: "",
+    //       village: "",
+    //     },
     resolver: zodResolver(FarmDataValidator),
   });
   const { fields, append, remove } = useFieldArray({
@@ -280,32 +280,30 @@ export default function FarmDataDialog({
   const { user } = useUserData();
   const { updateFarm } = useFarmsData();
   useEffect(() => {
-    if (!prismaUser) return;
-    remove(0);
-    if (user)
-      append({
-        name: prismaUser.firstName + " " + prismaUser.secondName,
-        email: user.email!,
-        phone: prismaUser.phone,
-        workPhone: prismaUser.workPhone,
-        position: prismaUser.position,
-      });
+    // if (!prismaUser) return;
+    // remove(0);
+    // if (user)
+    //   append({
+    //     name: prismaUser.firstName + " " + prismaUser.secondName,
+    //     email: user.email!,
+    //     phone: prismaUser.phone,
+    //   });
   }, [JSON.stringify(prismaUser)]);
   const router = useRouter();
   const ClientSubmit = async (data: FarmDataType) => {
     console.log(data);
     if (!prismaUser) throw new Error("нема прізма юзера");
-    const res = await onSubmit(
-      {
-        ...data,
-        code: +data.code,
-        regionId: +data.regionId,
-        id: enterprise?.id,
-      },
-      prismaUser.id,
-      farm.id
-    );
-    if (res) updateFarm(res);
+    // const res = await onSubmit(
+    //   {
+    //     ...data,
+    //     code: +data.code,
+    //     regionId: +data.regionId,
+    //     id: enterprise?.id,
+    //   },
+    //   prismaUser.id,
+    //   farm.id
+    // );
+    // if (res) updateFarm(res);
     // router.refresh();
     setIsOpen(false);
     reset();
@@ -325,7 +323,7 @@ export default function FarmDataDialog({
           errors={errors}
           farm={farm}
           prismaUser={prismaUser}
-          regions={regions}
+          // regions={regions}
           register={register}
           user={user}
         />

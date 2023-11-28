@@ -16,12 +16,12 @@ import {
   Select,
   Stack,
 } from "@chakra-ui/react";
-import { DemonstrationActivity } from "@prisma/client";
 import React, { useState } from "react";
 import colors from "@/components/ui/ColorConsts";
+import { Event } from "@prisma/client";
 const districts = getDistricts();
 
-function Content({ events }: { events: DemonstrationActivity[] | [] }) {
+function Content({ events }: { events: Event[] | [] }) {
   const currDate = new Date();
   const currMonth = currDate.getMonth();
   const currDay = currDate.getDay();

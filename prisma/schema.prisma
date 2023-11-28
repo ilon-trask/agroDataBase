@@ -55,34 +55,34 @@ model POUOnUser {
 }
 
 model Project {
-  id              Int      @id @default(autoincrement())
-  number          Int
+  id              Int       @id @default(autoincrement())
+  number          Int?
   name            String
-  budget          Int
-  currency        Currency @relation(fields: [currencyId], references: [id])
-  start           DateTime
-  end             DateTime
-  donor           Donor    @relation(fields: [donorId], references: [id])
-  unitPOU         POU?     @relation("unitPOU", fields: [unitPOUId], references: [id])
-  recipientPOU    POU?     @relation("recipientPOU", fields: [recipientPOUId], references: [id])
-  eneficiaryPOU   POU?     @relation("eneficiaryPOU", fields: [eneficiaryPOUId], references: [id])
-  performerPOU    POU?     @relation("performerPOU", fields: [performerPOUId], references: [id])
+  budget          Int?
+  currency        Currency? @relation(fields: [currencyId], references: [id])
+  start           DateTime?
+  end             DateTime?
+  donor           Donor?    @relation(fields: [donorId], references: [id])
+  unitPOU         POU?      @relation("unitPOU", fields: [unitPOUId], references: [id])
+  recipientPOU    POU?      @relation("recipientPOU", fields: [recipientPOUId], references: [id])
+  eneficiaryPOU   POU?      @relation("eneficiaryPOU", fields: [eneficiaryPOUId], references: [id])
+  performerPOU    POU?      @relation("performerPOU", fields: [performerPOUId], references: [id])
   goal            String
-  sector          Sector   @relation(fields: [sectorId], references: [id])
-  isPublic        Boolean  @default(false)
-  createdAt       DateTime @default(now())
+  sector          Sector?   @relation(fields: [sectorId], references: [id])
+  isPublic        Boolean   @default(false)
+  createdAt       DateTime  @default(now())
   //тут треба забрати знак питання
-  initiator       User?    @relation("initiator", fields: [initiatorId], references: [id])
-  head            User?    @relation("head", fields: [headId], references: [id])
-  coordinator     User?    @relation("coordinator", fields: [coordinatorId], references: [id])
-  photoId         Int
-  currencyId      Int
-  donorId         Int
+  initiator       User?     @relation("initiator", fields: [initiatorId], references: [id])
+  head            User?     @relation("head", fields: [headId], references: [id])
+  coordinator     User?     @relation("coordinator", fields: [coordinatorId], references: [id])
+  photoId         Int?
+  currencyId      Int?
+  donorId         Int?
   unitPOUId       Int?
   recipientPOUId  Int?
   eneficiaryPOUId Int?
   performerPOUId  Int?
-  sectorId        Int
+  sectorId        Int?
   initiatorId     Int?
   headId          Int?
   coordinatorId   Int?
@@ -138,10 +138,10 @@ model Event {
   createdAt      DateTime @default(now())
   isPublic       Boolean  @default(false)
   user           User     @relation(fields: [userId], references: [id])
-  project        Project  @relation(fields: [projectId], references: [id])
-  photoId        Int
+  project        Project? @relation(fields: [projectId], references: [id])
+  photoId        Int?
   userId         Int
-  projectId      Int
+  projectId      Int?
 }
 
 model Contract {

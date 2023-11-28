@@ -58,7 +58,7 @@ export default function DemonstrationActivitiesTable(props: props) {
               <Tr key={el.id}>
                 <Td>{useGetDateFromDate(el.date)}</Td>
                 <Td>{el.name}</Td>
-                <Td>{el.user.firstName + " " + el.user.secondName}</Td>
+                <Td>{el?.user?.firstName + " " + el?.user?.secondName}</Td>
                 <Td>{el.direction}</Td>
                 <Td>{el.district}</Td>
                 <Td>Додатково</Td>

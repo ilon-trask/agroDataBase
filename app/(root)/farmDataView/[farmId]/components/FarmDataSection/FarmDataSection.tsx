@@ -3,20 +3,20 @@ import React, { useEffect, useState } from "react";
 import FarmDataTable from "../FarmDataTable";
 import MyButton from "@/components/ui/MyButton";
 import FarmDataDialog from "./component/FarmDataDialog/FarmDataDialog";
-import { POU, Region, User as PrismaUser } from "@prisma/client";
+import { POU, User as PrismaUser } from "@prisma/client";
 import { POUWithSpecialization } from "@/types/DemonstrationFarmsTypes";
 import { useFarmsData } from "@/hooks/use_farmsData";
 import { User } from "@supabase/auth-helpers-nextjs";
 
 function FarmDataSection({
   farm,
-  regions,
+  // regions,
   farmId,
   prismaUserData,
   user,
 }: {
   farm: POUWithSpecialization;
-  regions: Region[] | [];
+  // regions: Region[] | [];
   farmId: string;
   prismaUserData: PrismaUser | null;
   user: User | null;
@@ -40,9 +40,9 @@ function FarmDataSection({
       <FarmDataDialog
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        regions={regions}
+        // regions={regions}
         farm={farmState}
-        enterprise={farmState.Enterprise}
+        // enterprise={farmState.Enterprise}
       />
     </>
   );

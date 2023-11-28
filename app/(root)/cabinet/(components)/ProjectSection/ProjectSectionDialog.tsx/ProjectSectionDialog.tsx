@@ -9,6 +9,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Textarea,
 } from "@chakra-ui/react";
 import { User } from "@prisma/client";
 import React, { Dispatch, SetStateAction, useState } from "react";
@@ -57,11 +58,11 @@ function ProjectSectionDialog({
           <ModalBody>
             <FormLabel>
               Назва
-              <Input {...register("name", { required: true })} />
+              <Textarea {...register("name", { required: true })} />
             </FormLabel>
             <FormLabel>
               Мета
-              <Input {...register("goal", { required: true })} />
+              <Textarea {...register("goal", { required: true })} />
             </FormLabel>
           </ModalBody>
           <ModalFooter>

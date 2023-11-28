@@ -13,7 +13,7 @@ export default async function page({ params }: { params: { farmId: string } }) {
   );
   if (!farm) throw new Error("не має ферми з таким id");
 
-  const regions = await getRegions();
+  // const regions = await getRegions();
   const supabase = createServerClient();
   const {
     data: { user },
@@ -25,7 +25,7 @@ export default async function page({ params }: { params: { farmId: string } }) {
   return (
     <MyContainer>
       <Quiz
-        regions={regions}
+        // regions={regions}
         farm={farm}
         prismaUser={prismaUserData}
         user={user}
