@@ -4,6 +4,7 @@ import MyHeading from "@/components/ui/MyHeading";
 import MyText from "@/components/ui/MyText";
 import prismadb from "@/lib/prismadb";
 import React from "react";
+import ProjectContent from "./ProjectContent";
 
 async function page({
   params: { projectId },
@@ -17,17 +18,9 @@ async function page({
   });
   return (
     <MyContainer>
-      <MyHeading>Landing page проекту </MyHeading>
+      <MyHeading>Проект</MyHeading>
       <MyText>{projectId}</MyText>
-      <Div display={"flex"}>
-        <Div width={"50%"}></Div>
-        <Div width={"50%"}>
-          <MyHeading textAlign={"left"}>Назва </MyHeading>
-          <MyText>{project?.name}</MyText>
-          <MyHeading textAlign={"left"}>Мета </MyHeading>
-          <MyText>{project?.goal}</MyText>
-        </Div>
-      </Div>
+      <ProjectContent project={project} />
     </MyContainer>
   );
 }

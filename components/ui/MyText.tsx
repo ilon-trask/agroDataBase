@@ -5,7 +5,7 @@ import React from "react";
 
 function MyText(props: TextProps) {
   return (
-    <Text {...props} color={color.primaryColor} fontSize={"16px"}>
+    <Text color={color.primaryColor} fontSize={"16px"} {...props}>
       {props.children}
     </Text>
   );

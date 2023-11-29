@@ -42,8 +42,8 @@ export default function NonAuthMainPage({
   return (
     <>
       <MyContainer>
-        <Title width={"1064px"} textAlign={"center"} mx={"auto"} mt={"100px"}>
-          Найкорисніша площадка для аграріїв в Україні
+        <Title width={"1088px"} textAlign={"center"} mx={"auto"} mt={"100px"}>
+          Найкорисніша площадка для проектів в Україні
         </Title>
         <Flex
           justifyContent={"space-between"}
