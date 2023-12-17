@@ -77,10 +77,10 @@ function NavBar({ user }: { user: User | null }) {
         <MyText
           cursor={"pointer"}
           onClick={() => {
-            // router.push("/projects");
+            router.push("/templates");
           }}
         >
-          Спільнота
+          Шаблони
         </MyText>
       </Flex>
       {userState ? (

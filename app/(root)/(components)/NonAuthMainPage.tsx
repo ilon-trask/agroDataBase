@@ -6,23 +6,10 @@ import MyHeading from "@/components/ui/MyHeading";
 import MyButton from "@/components/ui/MyButton";
 import { EventWithUser } from "@/types/DemonstrationActivitiesTypes";
 // import { Region } from "@prisma/client";
-import { POUWithSpecialization } from "@/types/DemonstrationFarmsTypes";
 import Title from "@/components/ui/Title";
-import {
-  ButtonGroup,
-  Card,
-  CardBody,
-  CardFooter,
-  Divider,
-  Flex,
-  Heading,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import colors from "@/components/ui/ColorConsts";
-import ArrowIcon from "@/components/ui/Icons/ArrowIcon";
-import EventContent from "../events/Content";
-import ProjectsContent from "../projects/Content";
+
 import { ProjectWithUser } from "@/types/ProjectTypes";
 import { OfferWithUserAndPOU } from "@/types/OfferTypes";
 import MyText from "@/components/ui/MyText";
@@ -42,46 +29,26 @@ export default function NonAuthMainPage({
   return (
     <>
       <MyContainer>
-        <Title width={"1088px"} textAlign={"center"} mx={"auto"} mt={"100px"}>
-          Найкорисніша площадка для проектів в Україні
+        <Title width={"800px"} mt={"100px"}>
+          Документи з шаблонів і на замовлення
         </Title>
         <Flex
+          mt={"50px"}
+          alignItems={"center"}
           justifyContent={"space-between"}
-          width={"1000px"}
-          mx={"auto"}
-          mt={"24px"}
+          width={"800px"}
         >
-          <Text
-            textAlign={"center"}
-            color={colors.secondaryColor}
-            fontWeight={"semibold"}
-            width={"260px"}
-            fontSize={"20px"}
+          <MyText fontWeight={"semibold"} fontSize={"32px"}>
+            Типовий документ
+          </MyText>
+          <MyButton
+            variant={"ghost"}
+            onClick={() => {
+              router.push("/templates");
+            }}
           >
-            Створення та пошук актуальних заходів
-          </Text>
-          <Text
-            textAlign={"center"}
-            color={colors.secondaryColor}
-            fontWeight={"semibold"}
-            width={"260px"}
-            fontSize={"20px"}
-          >
-            Започаткувати або&nbsp;підтримати проект
-          </Text>
-          <Text
-            textAlign={"center"}
-            color={colors.secondaryColor}
-            fontWeight={"semibold"}
-            width={"260px"}
-            fontSize={"20px"}
-          >
-            Долучитися до спільноти вигідних партнерів
-          </Text>
-        </Flex>
-        <Flex justifyContent={"center"} gap={"24px"} mt={"40px"}>
-          <MyButton>Спробувати</MyButton>
-          <MyButton variant={"outline"}>Дізнатися більше</MyButton>
+            Вибрати
+          </MyButton>
         </Flex>
         <PageContent events={events} offers={offers} projects={projects} />
       </MyContainer>
