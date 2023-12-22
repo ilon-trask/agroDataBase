@@ -7,8 +7,8 @@ import { User } from "@prisma/client";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "demoFarm",
-  description: "demoFarm",
+  title: "TemplateDataBase",
+  description: "TemplateDataBase",
 };
 
 export default async function RootLayout({
@@ -23,9 +23,7 @@ export default async function RootLayout({
   let prismaUser: User | null = null;
   if (user) {
     prismaUser = await prismadb.user.findFirst({
-      where: {
-        sub: user.id,
-      },
+      where: { sub: user.id },
     });
   }
 

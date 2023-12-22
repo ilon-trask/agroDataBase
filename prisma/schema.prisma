@@ -26,6 +26,7 @@ model User {
   coordinatorIn Project[]   @relation("coordinator")
   Offer         Offer[]
   Event         Event[]
+  Template      Template[]
 
   @@index([sub])
 }
@@ -43,6 +44,7 @@ model POU {
   eneficiaryPOU Project[]   @relation("eneficiaryPOU")
   performerPOU  Project[]   @relation("performerPOU")
   Offer         Offer[]
+  Template      Template[]
 }
 
 model POUOnUser {
@@ -147,4 +149,15 @@ model Event {
 model Contract {
   id         Int @id @default(autoincrement())
   templateId Int
+}
+
+model Template {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  isPublic    Boolean @default(false)
+  POU         POU?    @relation(fields: [pOUId], references: [id])
+  pOUId       Int?
+  user        User    @relation(fields: [userId], references: [id])
+  userId      Int
 }

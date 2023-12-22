@@ -1,11 +1,37 @@
 "use client";
 import Div from "@/components/ui/Div";
 import MyButton from "@/components/ui/MyButton";
-import { Flex, Select } from "@chakra-ui/react";
+import { Box, Card, Flex, Grid, Heading, Select, Text } from "@chakra-ui/react";
 import React from "react";
 import CreateTemplate from "./CreateTemplate";
+import { Template } from "@prisma/client";
+import OptionIcon from "@/components/ui/Icons/OptionIcon";
 
-function TemplatesContent() {
+function TemplateCard({ name }: { name: string }) {
+  //width={"392px"}
+  return (
+    <Card p={"20px"}>
+      <Box>
+        <Flex justifyContent={"space-between"}>
+          <Heading fontSize={"24px"} fontWeight={"semibold"} height={"60px"}>
+            {name}
+          </Heading>
+          <OptionIcon />
+        </Flex>
+        <Text fontWeight={"medium"} fontSize={"16px"} mt={"8px"}>
+          Опис шаблону
+        </Text>
+      </Box>
+
+      <Flex mt={"32px"} justifyContent={"end"} gap={"8px"}>
+        <MyButton variant={"outline"}>Переглянути зразок</MyButton>
+        <MyButton>Перейти</MyButton>
+      </Flex>
+    </Card>
+  );
+}
+
+function TemplatesContent({ templates }: { templates: Template[] }) {
   return (
     <Div>
       <Flex>
@@ -22,8 +48,11 @@ function TemplatesContent() {
           <option value="">Назва документу</option>
         </Select>
       </Flex>
-      <Flex></Flex>
-      <CreateTemplate />
+      <Grid templateColumns={"1fr 1fr 1fr 1fr"}>
+        {templates.map((el) => (
+          <TemplateCard name={el.name} key={el.id} />
+        ))}
+      </Grid>
     </Div>
   );
 }

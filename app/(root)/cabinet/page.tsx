@@ -15,6 +15,7 @@ import { ProjectWithUser } from "../../../types/ProjectTypes";
 import OfferSection from "./(components)/OfferSection/OfferSection";
 import { OfferWithUserAndPOU } from "@/types/OfferTypes";
 import Div from "@/components/ui/Div";
+import Documents from "./(components)/Documents/Documents";
 
 export default async function Page() {
   const supabase = createServerClient();
@@ -42,11 +43,20 @@ export default async function Page() {
     where: { user: { sub: user.id } },
     orderBy: { id: "asc" },
   });
+  const templates = await prismadb.template.findMany({
+    where: {
+      userId: prismaUser.id,
+    },
+  });
   return (
     <MyContainer>
       <CheckPrismaUser />
       <MyHeading>Персональний кабінет</MyHeading>
       <UserDataSection user={user} prismaUser={prismaUser} />
+      <MyHeading textAlign={"left"} mt={"160px"}>
+        Мої документи
+      </MyHeading>
+      <Documents templates={templates} />
       <MyHeading textAlign={"left"} mt={"160px"}>
         Зайнятість
       </MyHeading>
