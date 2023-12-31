@@ -14,6 +14,10 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
+//
+//цей компонент створює шаблони його бачить лише адмін
+//
+
 function CreateTemplate() {
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => {

@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
 export type CreateTemplate = {
   name: string;
   description: string;
-  pOUId?: string;
+  // pOUId?: string;
 };
 
 function CreateDocumentTemplate() {
@@ -68,10 +68,10 @@ function CreateDocumentTemplate() {
                 <FormLabel>Опис шаблону</FormLabel>
                 <Input {...register("description", { required: true })} />
               </FormControl>
-              <FormControl>
+              {/* <FormControl>
                 <FormLabel>Підприємство</FormLabel>
                 <Select {...register("pOUId")}></Select>
-              </FormControl>
+              </FormControl> */}
             </ModalBody>
 
             <ModalFooter>

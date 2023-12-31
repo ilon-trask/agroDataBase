@@ -2,12 +2,21 @@
 import Div from "@/components/ui/Div";
 import MyButton from "@/components/ui/MyButton";
 import { Box, Card, Flex, Grid, Heading, Select, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { createContext, useState } from "react";
 import CreateTemplate from "./CreateTemplate";
 import { Template } from "@prisma/client";
 import OptionIcon from "@/components/ui/Icons/OptionIcon";
+import CreateDocumentFromTemplate from "./CreateDocumentFromTemplate/CreateDocumentFromTemplate";
 
-function TemplateCard({ name }: { name: string }) {
+function TemplateCard({
+  id,
+  name,
+  onClick,
+}: {
+  id: number;
+  name: string;
+  onClick: (id: number) => void;
+}) {
   //width={"392px"}
   return (
     <Card p={"20px"}>
@@ -25,13 +34,22 @@ function TemplateCard({ name }: { name: string }) {
 
       <Flex mt={"32px"} justifyContent={"end"} gap={"8px"}>
         <MyButton variant={"outline"}>Переглянути зразок</MyButton>
-        <MyButton>Перейти</MyButton>
+        <MyButton onClick={() => onClick(id)}>Перейти</MyButton>
       </Flex>
     </Card>
   );
 }
 
 function TemplatesContent({ templates }: { templates: Template[] }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [chosenId, setChosenId] = useState(0);
+
+  const onClick = (id: number) => {
+    console.log(id);
+    setIsOpen(true);
+    setChosenId(id);
+  };
+
   return (
     <Div>
       <Flex>
@@ -50,9 +68,20 @@ function TemplatesContent({ templates }: { templates: Template[] }) {
       </Flex>
       <Grid templateColumns={"1fr 1fr 1fr 1fr"}>
         {templates.map((el) => (
-          <TemplateCard name={el.name} key={el.id} />
+          <TemplateCard
+            id={el.id}
+            name={el.name}
+            key={el.id}
+            onClick={onClick}
+          />
         ))}
       </Grid>
+      <CreateDocumentFromTemplate
+        templates={templates}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        chosenId={chosenId}
+      />
     </Div>
   );
 }
