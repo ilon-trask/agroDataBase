@@ -7,6 +7,7 @@ import CreateTemplate from "./CreateTemplate";
 import { Template } from "@prisma/client";
 import OptionIcon from "@/components/ui/Icons/OptionIcon";
 import CreateDocumentFromTemplate from "./CreateDocumentFromTemplate/CreateDocumentFromTemplate";
+import { usePrismaUserData } from "@/hooks/use_prismaUserData ";
 
 function TemplateCard({
   id,
@@ -49,7 +50,7 @@ function TemplatesContent({ templates }: { templates: Template[] }) {
     setIsOpen(true);
     setChosenId(id);
   };
-
+  const { prismaUser } = usePrismaUserData();
   return (
     <Div>
       <Flex>
@@ -76,12 +77,14 @@ function TemplatesContent({ templates }: { templates: Template[] }) {
           />
         ))}
       </Grid>
-      <CreateDocumentFromTemplate
-        templates={templates}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        chosenId={chosenId}
-      />
+      {prismaUser && (
+        <CreateDocumentFromTemplate
+          templates={templates}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          chosenId={chosenId}
+        />
+      )}
     </Div>
   );
 }
